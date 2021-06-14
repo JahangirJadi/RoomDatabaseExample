@@ -20,11 +20,12 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 
-        val dao = SubscriberDatabase.getInstance(application).subscriberDao
+        val dao = SubscriberDatabase.getInstance(application).subscriberDAO
         val repository = SubscriberRepository(dao)
         val factory = SubscriberViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(SubscriberViewModel::class.java)
 
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
     }
 }

@@ -7,18 +7,18 @@ import kotlinx.coroutines.flow.Flow
 interface SubscriberDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSubscriber(subscriber: Subscriber)
+    suspend fun insertSubscriber(subscriber: Subscriber) : Long
 
     @Update
-    suspend fun updateSubscriber(subscriber: Subscriber)
+    suspend fun updateSubscriber(subscriber: Subscriber) : Int
 
     @Delete
-    suspend fun deleteSubscribers(subscriber: Subscriber)
+    suspend fun deleteSubscribers(subscriber: Subscriber) : Int
 
-    @Query("Delete from Subscriber")
+    @Query("Delete from table_subscriber")
     suspend fun deleteAllSubscriber()
 
-    @Query("Select * from Subscriber")
+    @Query("Select * from table_subscriber")
     fun getAllSubscribers() : Flow<List<Subscriber>>
 
 }
