@@ -2,10 +2,13 @@ package com.marfarijj.roomexample.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.marfarijj.roomexample.data.database.Subscriber
 import com.marfarijj.roomexample.data.repository.SubscriberRepository
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class SubscriberViewModel(
@@ -13,6 +16,7 @@ class SubscriberViewModel(
 ) : ViewModel() {
 
     val subscribers = repository.subscribers
+//    val subscribersList
 
     val inputName = MutableLiveData<String>()
     val inputEmail = MutableLiveData<String>()
@@ -41,6 +45,12 @@ class SubscriberViewModel(
         }
     }
 
+    fun getSubscribers() {
+        viewModelScope.launch {
+            repository.subscribers
+        }
+    }
+
     fun insertSubscriber(subscriber: Subscriber): Job =
         viewModelScope.launch {
             repository.insertSubscriber(subscriber)
@@ -58,7 +68,13 @@ class SubscriberViewModel(
 
     fun clearAll(): Job =
         viewModelScope.launch {
+
             repository.deleteAllSubscriber()
         }
 
+    fun getAllSubscribers() = liveData {
+        repository.subscribers.collect {
+            emit(it)
+        }
+    }
 }
