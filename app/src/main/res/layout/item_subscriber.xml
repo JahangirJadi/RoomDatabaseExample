@@ -11,6 +11,7 @@
     app:cardCornerRadius="8dp">
 
     <LinearLayout
+        android:id="@+id/layout_item_subscriber"
         android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

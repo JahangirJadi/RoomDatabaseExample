@@ -2,6 +2,7 @@ package com.marfarijj.roomexample.data.repository
 
 import com.marfarijj.roomexample.data.database.Subscriber
 import com.marfarijj.roomexample.data.database.SubscriberDao
+import com.marfarijj.roomexample.util.Event
 
 class SubscriberRepository(private val subscriberDao: SubscriberDao)
 {
@@ -13,6 +14,7 @@ class SubscriberRepository(private val subscriberDao: SubscriberDao)
 
     suspend fun updateSubscriber(subscriber: Subscriber){
         subscriberDao.updateSubscriber(subscriber)
+
     }
 
     suspend fun deleteSubscriber(subscriber: Subscriber){
